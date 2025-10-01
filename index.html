@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To-Do List — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="vanta-bg">
+<main class="container">
+  <header class="app-header">
+    <h1 class="app-title">My To-Do List</h1>
+    <p class="app-sub">Clean & Responsive</p>
+  </header>
+
+  <!-- Form input -->
+  <section class="form-section" aria-labelledby="add-task">
+    <h2 id="add-task" class="sr-only">Add Task</h2>
+    <form id="task-form" class="task-form" novalidate>
+      <div class="form-row">
+        <label for="task-title">Task title</label>
+        <input id="task-title" name="title" type="text" placeholder="e.g. Finish project report" required>
+        <small class="error" id="title-error" aria-live="polite"></small>
+      </div>
+      <div class="form-row">
+        <label for="task-due">Due date</label>
+        <input id="task-due" name="dueDate" type="date" required>
+        <small class="error" id="date-error" aria-live="polite"></small>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Task</button>
+        <button type="reset" class="btn btn-ghost">Reset</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Controls -->
+  <section class="controls" aria-label="Task controls">
+    <div class="filter-group" role="radiogroup" aria-label="Filter tasks">
+      <label>
+        <input type="radio" name="filter" value="all" checked>
+        All
+      </label>
+      <label>
+        <input type="radio" name="filter" value="active">
+        Active
+      </label>
+      <label>
+        <input type="radio" name="filter" value="completed">
+        Completed
+      </label>
+    </div>
+
+    <input id="task-search" type="text" placeholder="🔍 Search tasks..." class="search-input">
+    <select id="sort-select" class="sort-select">
+      <option value="created">Sort by Created</option>
+      <option value="due">Sort by Due Date</option>
+    </select>
+
+    <button id="theme-toggle" class="btn btn-ghost">🌙 Dark</button>
+  </section>
+
+    <!-- Progress -->
+    <div class="progress-container">
+        <div id="progress-fill">0%</div>
+    </div>
+    <div class="summary">
+        <span id="total-count">0</span> tasks
+    </div>
+
+
+  <!-- Task list -->
+  <section class="list-section" aria-labelledby="tasks-list">
+    <h2 id="tasks-list" class="sr-only">Tasks List</h2>
+    <ul id="tasks" class="task-list" aria-live="polite"></ul>
+  </section>
+
+  <footer class="app-footer">
+    <small>Build by Arvin Dewonoto | arvin125dewo@gmail.com |   <a href="https://www.linkedin.com/in/arvin-dewonoto-77157534b/" target="_blank" rel="noopener noreferrer">
+        LinkedIn
+    </small>
+  </footer>
+</main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js"></script>
+    <script src="js/script.js" defer></script>
+</body>
+</html>
+
