@@ -89,7 +89,7 @@ function renderTasks(){
 
     const actions=document.createElement('div'); actions.className='task-actions';
     const delBtn=document.createElement('button'); delBtn.className='icon-btn'; delBtn.title='Delete task'; delBtn.textContent='🗑️';
-    delBtn.addEventListener('click',()=>{ if(confirm('Delete this task?')) deleteTask(task.id); });
+    delBtn.addEventListener('click', () => {showConfirm('Are you sure you want to delete this task?', () => {deleteTask(task.id);});});    
     actions.appendChild(delBtn);
 
     li.appendChild(left); li.appendChild(actions); tasksList.appendChild(li);
@@ -97,6 +97,34 @@ function renderTasks(){
 
   updateProgress();
 }
+
+const confirmToast = document.getElementById('confirm-toast');
+const confirmMessage = document.getElementById('confirm-message');
+const confirmYes = document.getElementById('confirm-yes');
+const confirmNo = document.getElementById('confirm-no');
+
+function showConfirm(message, onYes) {
+  confirmMessage.textContent = message;
+  confirmToast.style.display = 'flex';
+
+  const cleanUp = () => {
+    confirmYes.removeEventListener('click', yesHandler);
+    confirmNo.removeEventListener('click', noHandler);
+    confirmToast.style.display = 'none';
+  };
+
+  const yesHandler = () => {
+    cleanUp();
+    onYes();
+  };
+  const noHandler = () => {
+    cleanUp();
+  };
+
+  confirmYes.addEventListener('click', yesHandler);
+  confirmNo.addEventListener('click', noHandler);
+}
+
 
 // ---------- Progress ----------
 function updateProgress(){
@@ -127,6 +155,37 @@ themeToggle.addEventListener('click',()=>{
   themeToggle.textContent=isDark?'☀️ Light':'🌙 Dark';
   saveTheme(isDark?'dark':'light'); initVanta();
 });
+
+// ---------Toast notification----------
+function showToast(message, duration = 2000) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, duration);
+}
+
+function addTask(title, dueDate) {
+  const newTask = {
+    id: uid(),
+    title: title.trim(),
+    dueDate,
+    completed: false,
+    createdAt: new Date().toISOString()
+  };
+  tasks.unshift(newTask);
+  saveToLocalStorage();
+  renderTasks();
+  showToast('Task added successfully ✅');  // ✨
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  saveToLocalStorage();
+  renderTasks();
+  showToast('Task deleted ❌'); // ✨
+}
 
 // ---------- Vanta ----------
 function initVanta(){
