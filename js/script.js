@@ -197,9 +197,10 @@ function initVanta(){
     minHeight:200, minWidth:200, scale:1, scaleMobile:1,
     color:isDark?0x3ff0ff:0x0077ff,
     color2:isDark?0xffffff:0x000000,
-    backgroundColor:isDark?0x0d1117:0xffffff
+    backgroundColor:isDark?0x0d1117:0xffffff,
   });
 }
+
 
 // ---------- Init ----------
 function init(){
